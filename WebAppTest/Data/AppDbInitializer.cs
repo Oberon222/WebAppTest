@@ -19,10 +19,9 @@ namespace WebAppTest.Data
                 {
                     context.Books.AddRange(
                      new Book()
-                     { 
+                     {
                          Title = "My Book",
-                         Description = "іжмо длІОВ ПДЛОРчСМИ ",
-                         Author = "Mike",
+                         Description = "іжмо длІОВ ПДЛОРчСМИ ",                         
                          IsRead = true,
                          DateRead = DateTime.Now.AddDays(-12),
                          Rate = 4,
@@ -34,8 +33,7 @@ namespace WebAppTest.Data
                     new Book()
                     {
                         Title = "My Book2",
-                        Description = "] oJKdfk kjalkjfg PEPOT][SOKB",
-                        Author = "John",
+                        Description = "] oJKdfk kjalkjfg PEPOT][SOKB",                        
                         IsRead = false,
                         Genre = "Programming",
                         ImageURL = "https://balka-book.com/files/2021/07_16/17_05/u_files_store_25_1759.jpg",

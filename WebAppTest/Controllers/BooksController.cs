@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAppTest.Data.Models;
 using WebAppTest.Data.Services;
+using WebAppTest.Data.ViewModels;
 
 namespace WebAppTest.Controllers
 {
@@ -20,9 +21,9 @@ namespace WebAppTest.Controllers
         }
 
         [HttpPost("add-book")]
-        public IActionResult AddBook([FromBody] Book book)
+        public IActionResult AddBook([FromBody] BookVM book)
         {
-            _bookService.AddBook(book);
+            _bookService.AddBookWithAutors(book);
             return Ok();
         }
 
