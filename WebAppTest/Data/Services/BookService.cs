@@ -32,17 +32,6 @@ namespace WebAppTest.Data.Services
             _context.SaveChanges();
         }
 
-        public void DeleteBook(int id)
-        {
-            var _book = _context.Books.FirstOrDefault(b => b.Id == id);
-            if(_book != null)
-            {
-                _context.Remove(_book);
-            }
-
-            _context.SaveChanges();
-        }
-
         public void DeleteBook(Book book)
         {
             var _book = _context.Books.Find(book);
@@ -55,19 +44,25 @@ namespace WebAppTest.Data.Services
         }
 
         
-        public void EditBook(Book book, int id)
+        public void EditBook(Book book)
         {
-            //var _book = _context.Books.FirstOrDefault(b => b.Id == book.Id);
-
-            var _book =_context.Books.FirstOrDefault(b=> b.Id == id);
-
-            if(_book !=null)
+            var _book = new Book()
             {
-                _context.Books.Update(); // доробити
-            }
+                Title = book.Title,
+                Description = book.Description,
+                IsRead = book.IsRead,
+                DateRead = book.DateRead,
+                Rate = book.Rate,
+                Genre = book.Genre,
+                Author = book.Author,
+                ImageURL = book.ImageURL,
+                DateAdded = book.DateAdded
+            };
+             _context.Books.Update(_book);
+            _context.SaveChanges();
         }
 
-        public IEnumerable<Book> GetAllBooks()
+        public List<Book> GetBooks()
         {
             return _context.Books.ToList();
         }

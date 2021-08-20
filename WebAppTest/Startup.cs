@@ -60,6 +60,8 @@ namespace WebAppTest
             {
                 endpoints.MapControllers();
             });
+
+            AppDbInitializer.Seed(app);
         }
     }
 }

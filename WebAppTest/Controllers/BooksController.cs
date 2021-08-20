@@ -26,10 +26,23 @@ namespace WebAppTest.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpDelete("delete-book")]
+        public IActionResult DeleteBook([FromBody] Book book)
+        {
+            _bookService.DeleteBook(book);
+            return Ok();
+        }
+
+        [HttpPut("edit-book")]
         public IActionResult EditBook(Book book)
         {
-            return Ok(); //  повернути оновлений об*єкт в параметрах
+            return Ok(book); 
+        }
+
+        [HttpGet("get-books")]
+        public IActionResult GetBooks()
+        {
+            return Ok(_bookService.GetBooks());
         }
     }
 }
