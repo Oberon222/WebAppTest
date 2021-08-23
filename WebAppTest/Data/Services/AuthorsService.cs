@@ -36,8 +36,7 @@ namespace WebAppTest.Data.Services
 
             }).FirstOrDefault();
 
-            return 
-
+            return _author;
         }
     }
 }

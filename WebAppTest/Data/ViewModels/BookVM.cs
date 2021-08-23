@@ -33,6 +33,6 @@ namespace WebAppTest.Data.ViewModels
         public DateTime DateAdded { get; set; }
 
         public string PublisherName { get; set; }
-        public List<int> AuthorsId { get; set; }
+        public List<string> AuthorsName { get; set; }
     }
 }

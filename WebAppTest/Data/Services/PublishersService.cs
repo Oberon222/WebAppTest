@@ -40,7 +40,11 @@ namespace WebAppTest.Data.Services
                 .Select(n => new PublisherWithBooksAndAuthorsVM()
                 {
                     Name = n.Name,
-                    BookAuthors = n.Books.Select(n => n.)
+                    BookAuthors = n.Books.Select(n => new BookAuthorVM()
+                    {
+                         BookName = n.Title,
+                         BookAuthors = n.Book_Authors.Select(n => n.Author.FullName).ToList()
+                    }).ToList()
 
                 }).FirstOrDefault();
             return _publisherData;

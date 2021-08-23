@@ -95,8 +95,9 @@ namespace WebAppTest.Data.Services
                 Genre = book.Genre,
                 ImageURL = book.ImageURL,
                 PublisherName = book.Publisher.Name,
-                AutorsNames = book.Book_Authors.Select(n => n.Author.FullName).ToList()
-            }) ;
+                AuthorsName = book.Book_Authors.Select(n => n.Author.FullName).ToList()
+            }).FirstOrDefault();
+            return _bookWithAuthors;
         }
 
         public Book UpdateBookById(int id, BookVM book)
