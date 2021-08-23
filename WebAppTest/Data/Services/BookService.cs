@@ -73,7 +73,7 @@ namespace WebAppTest.Data.Services
                 IsRead = book.IsRead,
                 DateRead = book.DateRead,
                 Rate = book.Rate,
-                Genre = book.Genre,                
+                Genre = book.Genre,
                 ImageURL = book.ImageURL,
                 DateAdded = book.DateAdded
             };
@@ -81,9 +81,56 @@ namespace WebAppTest.Data.Services
             _context.SaveChanges();
         }
 
-        public List<Book> GetBooks()
+        public List<Book> GetBooks() => _context.Books.ToList();
+
+        public BooksWithAuthorsVM GetBookById(int bookId)
         {
-            return _context.Books.ToList();
+            var _bookWithAuthors = _context.Books.Where(n => n.Id == bookId).Select(book => new BooksWithAuthorsVM()
+            {
+                Title = book.Title,
+                Description = book.Description,
+                IsRead = book.IsRead,
+                DateRead = book.DateRead,
+                Rate = book.Rate,
+                Genre = book.Genre,
+                ImageURL = book.ImageURL,
+                PublisherName = book.Publisher.Name,
+                AutorsNames = book.Book_Authors.Select(n => n.Author.FullName).ToList()
+            }) ;
         }
+
+        public Book UpdateBookById(int id, BookVM book)
+        {
+            var _book = _context.Books.FirstOrDefault(n => n.Id == id);
+            if (_book != null)
+            {
+                _book.Title = book.Title;
+                _book.Description = book.Description;
+                _book.IsRead = book.IsRead;
+                _book.DateRead = book.DateRead;
+                _book.Rate = book.Rate;
+                _book.Genre = book.Genre;
+                _book.ImageURL = book.ImageURL;
+
+                _context.SaveChanges();
+            }
+
+            return _book;
+        }
+
+        public void DeleteBookById(int bookId)
+        {
+            var _book = _context.Books.FirstOrDefault(n => n.Id == bookId);
+            if (_book != null)
+            {
+                _context.Books.Remove(_book);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception($"The publisher with id: {bookId} not found");
+            }
+        }
+
     }
 }

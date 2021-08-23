@@ -46,6 +46,50 @@ namespace WebAppTest.Controllers
             return Ok(_bookService.GetBooks());
         }
 
+        [HttpGet("get-all-books")]
+        public IActionResult GetAllBookd()
+        {
+            var _allBooks = _bookService.GetBooks();
+            return Ok(_allBooks);
+        }
+
+        [HttpGet("get-book-by-id/{id}")]
+        public IActionResult GetBookById(int id)
+        {
+            var _book = _bookService.GetBookById(id);
+            if(_book != null)
+            {
+                return Ok(_book);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPut("update-book-by-id/{id}")]
+        public IActionResult UpdateBookById(int id, [FromBody] BookVM book)
+        {            
+            var _book = _bookService.UpdateBookById(id, book);
+            return Ok(_book);           
+        }
+
+        [HttpDelete("delete-book-by-id/{id}")]
+        public IActionResult DeleteBookById(int id)
+        {
+            try
+            {
+                _bookService.DeleteBookById(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
         
         
         
