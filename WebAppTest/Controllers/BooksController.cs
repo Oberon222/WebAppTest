@@ -35,7 +35,7 @@ namespace WebAppTest.Controllers
         }
 
         [HttpPut("edit-book")]
-        public IActionResult EditBook(Book book)
+        public IActionResult EditBook([FromBody] Book book)
         {
             return Ok(book); 
         }
@@ -45,5 +45,9 @@ namespace WebAppTest.Controllers
         {
             return Ok(_bookService.GetBooks());
         }
+
+        
+        
+        
     }
 }

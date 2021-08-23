@@ -7,6 +7,7 @@ namespace WebAppTest.Data.ViewModels
 {
     public class BookVM
     {
+        
         public string Title { get; set; }
         public string Description { get; set; }
         public bool IsRead { get; set; }

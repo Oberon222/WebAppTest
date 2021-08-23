@@ -57,6 +57,12 @@ namespace WebAppTest.Data.Services
             _context.SaveChanges();
         }
 
+        //public void DeleteBookById(int bookId)
+        //{
+        //    var _book = _context.Books.FirstOrDefault(b => b.Id = bookId);
+
+        //}
+
         
         public void EditBook(Book book)
         {

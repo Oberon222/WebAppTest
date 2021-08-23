@@ -18,6 +18,7 @@ namespace WebAppTest.Data.Services
         public List<Publisher> GetAllPublishers()
         {
             var allPublishers = _context.Publishers.ToList();
+            return allPublishers;
         }
 
         public Publisher  AddPublisher(PublisherVM publisherVM)
@@ -30,5 +31,54 @@ namespace WebAppTest.Data.Services
             _context.SaveChanges();
             return _publisher;
         }
+
+        public Publisher GetPublisherById(int id) => _context.Publishers.FirstOrDefault(n => n.Id == id);
+
+        public PublisherWithBooksAndAuthorsVM GetPublisherData(int publisherId)
+        {
+            var _publisherData = _context.Publishers.Where(n => n.Id == publisherId)
+                .Select(n => new PublisherWithBooksAndAuthorsVM()
+                {
+                    Name = n.Name,
+                    BookAuthors = n.Books.Select(n => n.)
+
+                }).FirstOrDefault();
+            return _publisherData;
+        }       
+
+        public void DeletePublisher(PublisherVM publisherVM) //by Id
+        {
+            var _publisher = _context.Publishers.Find(publisherVM);
+            if(_publisher != null)
+            {
+                _context.Publishers.Remove(_publisher);
+                _context.SaveChanges();
+            }            
+        }
+
+        public void DeletePublisherById(int id)
+        {
+            var _publisher = _context.Publishers.FirstOrDefault(n => n.Id == id);
+            if(_publisher != null)
+            {
+                _context.Publishers.Remove(_publisher);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception($"The publisher with id: {id} not found");
+            }
+
+        }
+
+        public void EditPublisher(PublisherVM publisher)
+        {
+            var _publisher = new Publisher() // уточнити у Андрія
+            {
+                Name = publisher.Name
+            };
+            _context.Publishers.Update(_publisher);
+            _context.SaveChanges();
+        }            
     }
 }
